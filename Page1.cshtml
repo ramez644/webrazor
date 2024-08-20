@@ -1,0 +1,117 @@
+﻿@{
+
+    var name = "mohamed";
+    var Text = "";
+
+    var age = 14;
+}
+@{
+    if (DateTime.Now.Hour < 12)
+    {
+        Text = "goodmorning";
+    }
+    else
+    {
+
+        Text = "good night " + name;
+    }
+
+}
+@{var imagpath = "";
+    
+    }
+ 
+
+
+@{
+    string requestName = Request.QueryString["name"];
+    var requsetage = Request.QueryString["age"];
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+</head>
+<body>
+    <div>
+        hello mr @name and your age is @age
+
+    </div>
+    <div>
+        @Text;
+    </div>
+    <form action="" method="post">
+        <input type="text" name="name" value="" />
+        <input type="text" name="age" value="" />
+        <input type="submit" name="submit" />
+
+
+        <select name="choice">
+            <option value="download.jpg">photo1</option>
+            <option value="download.jpg">photo2</option>
+
+            <option value="download.jpg">photo3</option>
+
+            <option value="download.jpg"></option>
+
+            <option value="download.jpg">photo5</option>
+
+
+        </select>
+    </form>
+    <div>
+
+
+        @{
+            @*if (!Request.Form["name"].IsEmpty() && !Request.Form["age"].IsEmpty()){
+
+                requestName = Request.Form["name"];
+                requsetage = Request.Form["age"];
+                <div>
+                    your name is @requestName and your age is @requsetage
+                </div>
+
+
+            }*@
+
+
+
+
+            if (IsPost)
+            {
+
+                requestName = Request.Form["name"];
+                requsetage = Request.Form["age"];
+                <div>
+                    your name is @requestName and your age is @requsetage
+                </div>
+
+
+            }
+
+
+
+
+        }
+
+        @{
+
+            if (!Request.Form["choice"].IsEmpty())
+            {
+                imagpath = "images/" + Request["choice"];
+            }
+
+        }
+        <div>
+            <img src=@imagpath alt="text allowed " />
+
+        </div>
+
+    </div>
+  
+    @RenderPage("render.vbhtml")
+
+</body>
+</html>
